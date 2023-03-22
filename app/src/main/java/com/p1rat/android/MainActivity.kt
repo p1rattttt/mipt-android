@@ -63,7 +63,7 @@ fun SignUp() {
 
         Logo()
 
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(25.dp))
 
         Text(
             text = "Sign Up For Free",
@@ -110,6 +110,44 @@ fun SignUp() {
 
         Spacer(modifier = Modifier.height(15.dp))
 
+        val keepSigned = remember {
+            mutableStateOf(true)
+        }
+
+        val emailAboutPricing = remember {
+            mutableStateOf(true)
+        }
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row{
+                Checkbox(
+                    checked = keepSigned.value,
+                    onCheckedChange = { keepSigned.value = it },
+                    modifier = Modifier.padding(5.dp)
+                )
+                Text(
+                    "Keep Me Signed In",
+                    color = Color.Gray
+                )
+            }
+
+            Row{
+                Checkbox(
+                    checked = emailAboutPricing.value,
+                    onCheckedChange = { emailAboutPricing.value = it },
+                    modifier = Modifier.padding(5.dp)
+                )
+                Text(
+                    "Email Me About Special Pricing",
+                    color = Color.Gray
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(15.dp))
+
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
                 onClick = {},
@@ -148,7 +186,7 @@ fun Logo() {
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "our logo",
             modifier = Modifier
-                .size(200.dp)
+                .size(150.dp)
         )
         Text(
             "FoodNinja",
