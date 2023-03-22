@@ -75,7 +75,13 @@ fun SignUp() {
         TextField(
             label = { Text(text = "Username") },
             value = username.value,
-            onValueChange = { username.value = it }
+            onValueChange = { username.value = it },
+            placeholder = {
+                Text(
+                    text = "p1rattttt",
+                    color = Color.Gray
+                )
+            }
         )
 
         Spacer(modifier = Modifier.height(15.dp))
@@ -84,7 +90,13 @@ fun SignUp() {
             label = { Text(text = "Email") },
             value = email.value,
             onValueChange = { email.value = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            placeholder = {
+                Text(
+                    text = "lolkek@gmail.com",
+                    color = Color.Gray
+                )
+            }
         )
 
         Spacer(modifier = Modifier.height(15.dp))
@@ -93,7 +105,7 @@ fun SignUp() {
             label = { Text(text = "Password") },
             value = password.value,
             onValueChange = { password.value = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         )
 
         Spacer(modifier = Modifier.height(15.dp))
