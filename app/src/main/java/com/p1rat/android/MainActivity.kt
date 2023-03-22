@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
             MiptandroidTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    SignUp()
+                    SignUpScreen()
                 }
             }
         }
@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SignUp() {
+fun SignUpScreen() {
     Column(
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.Center,
