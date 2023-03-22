@@ -119,7 +119,7 @@ fun SignUp() {
         }
 
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.Start
         ) {
             Row{
                 Checkbox(
