@@ -61,6 +61,14 @@ fun SignUpScreen() {
             mutableStateOf(TextFieldValue())
         }
 
+        val keepSigned = remember {
+            mutableStateOf(true)
+        }
+
+        val emailAboutPricing = remember {
+            mutableStateOf(true)
+        }
+
         Logo()
 
         Spacer(modifier = Modifier.height(25.dp))
@@ -109,14 +117,6 @@ fun SignUpScreen() {
         )
 
         Spacer(modifier = Modifier.height(15.dp))
-
-        val keepSigned = remember {
-            mutableStateOf(true)
-        }
-
-        val emailAboutPricing = remember {
-            mutableStateOf(true)
-        }
 
         Column(
             horizontalAlignment = Alignment.Start
