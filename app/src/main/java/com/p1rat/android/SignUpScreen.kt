@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
@@ -41,19 +42,19 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
         Spacer(modifier = Modifier.height(25.dp))
 
         Text(
-            text = "Sign Up For Free",
+            text = stringResource(R.string.sign_up_label),
             style = TextStyle(fontSize = 20.sp)
         )
 
         Spacer(modifier = Modifier.height(15.dp))
 
         TextField(
-            label = { Text(text = "Username") },
+            label = { Text(text = stringResource(R.string.username_label)) },
             value = viewState.username,
             onValueChange = { SignUpEvent.ChangeUsername(it) },
             placeholder = {
                 Text(
-                    text = "p1rattttt",
+                    text = stringResource(R.string.username_placeholder),
                     color = Color.Gray
                 )
             }
@@ -62,13 +63,13 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
         Spacer(modifier = Modifier.height(15.dp))
 
         TextField(
-            label = { Text(text = "Email") },
+            label = { Text(text = stringResource(R.string.email_label)) },
             value = viewState.email,
             onValueChange = { loginViewModel.obtainEvent(SignUpEvent.ChangeEmail(it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             placeholder = {
                 Text(
-                    text = "lolkek@gmail.com",
+                    text = stringResource(R.string.email_placeholder),
                     color = Color.Gray
                 )
             }
@@ -77,7 +78,7 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
         Spacer(modifier = Modifier.height(15.dp))
 
         TextField(
-            label = { Text(text = "Password") },
+            label = { Text(text = stringResource(R.string.password_label)) },
             value = viewState.password,
             onValueChange = { loginViewModel.obtainEvent(SignUpEvent.ChangePassword(it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -95,7 +96,7 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
                     modifier = Modifier.padding(5.dp)
                 )
                 Text(
-                    "Keep Me Signed In",
+                    stringResource(R.string.agreement_1),
                     color = Color.Gray
                 )
             }
@@ -107,7 +108,7 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
                     modifier = Modifier.padding(5.dp)
                 )
                 Text(
-                    "Email Me About Special Pricing",
+                    stringResource(R.string.agreement_2),
                     color = Color.Gray
                 )
             }
@@ -123,12 +124,12 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
                     .fillMaxWidth()
                     .height(50.dp)
             ) {
-                Text(text = "SignUp")
+                Text(text = stringResource(R.string.sign_up))
             }
         }
 
         ClickableText(
-            text = AnnotatedString("already have an account?"),
+            text = AnnotatedString(stringResource(R.string.agreement_3)),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(20.dp),
