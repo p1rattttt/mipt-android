@@ -23,17 +23,18 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
 import com.p1rat.android.Logo
 import com.p1rat.android.R
 
 @Composable
-fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
+fun SignUpScreen(signUpScreenViewModel: SignUpScreenViewModel, navController: NavController) {
     Column(
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val state by loginViewModel.viewState.observeAsState()
+        val state by signUpScreenViewModel.viewState.observeAsState()
         val viewState = state ?: return
 
         Logo()
@@ -64,7 +65,7 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
         TextField(
             label = { Text(text = stringResource(R.string.email_label)) },
             value = viewState.email,
-            onValueChange = { loginViewModel.obtainEvent(SignUpEvent.ChangeEmail(it)) },
+            onValueChange = { signUpScreenViewModel.obtainEvent(SignUpEvent.ChangeEmail(it), navController) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             placeholder = {
                 Text(
@@ -79,7 +80,7 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
         TextField(
             label = { Text(text = stringResource(R.string.password_label)) },
             value = viewState.password,
-            onValueChange = { loginViewModel.obtainEvent(SignUpEvent.ChangePassword(it)) },
+            onValueChange = { signUpScreenViewModel.obtainEvent(SignUpEvent.ChangePassword(it), navController) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         )
 
@@ -91,7 +92,7 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
             Row{
                 Checkbox(
                     checked = viewState.keepSigned,
-                    onCheckedChange = { loginViewModel.obtainEvent(SignUpEvent.ChangeKeepSigned) },
+                    onCheckedChange = { signUpScreenViewModel.obtainEvent(SignUpEvent.ChangeKeepSigned, navController) },
                     modifier = Modifier.padding(5.dp)
                 )
                 Text(
@@ -103,7 +104,7 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
             Row{
                 Checkbox(
                     checked = viewState.emailAboutPricing,
-                    onCheckedChange = { loginViewModel.obtainEvent(SignUpEvent.ChangeEmailAboutPricing) },
+                    onCheckedChange = { signUpScreenViewModel.obtainEvent(SignUpEvent.ChangeEmailAboutPricing, navController) },
                     modifier = Modifier.padding(5.dp)
                 )
                 Text(
@@ -117,7 +118,7 @@ fun SignUpScreen(loginViewModel: SignUpScreenViewModel = viewModel()) {
 
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
-                onClick = {},
+                onClick = { signUpScreenViewModel.obtainEvent(SignUpEvent.SignUp, navController)},
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
                     .fillMaxWidth()

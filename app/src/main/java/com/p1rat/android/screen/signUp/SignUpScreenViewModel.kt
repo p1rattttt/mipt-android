@@ -3,6 +3,7 @@ package com.p1rat.android.screen.signUp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 
 sealed class SignUpEvent {
     data class ChangeUsername(val newUsername: String) : SignUpEvent()
@@ -10,6 +11,7 @@ sealed class SignUpEvent {
     data class ChangeEmail(val newEmail: String) : SignUpEvent()
     object ChangeKeepSigned : SignUpEvent()
     object ChangeEmailAboutPricing : SignUpEvent()
+    object SignUp : SignUpEvent()
 }
 
 data class SignUpState(
@@ -24,7 +26,7 @@ class SignUpScreenViewModel : ViewModel() {
     private val _viewState: MutableLiveData<SignUpState> = MutableLiveData(SignUpState())
     val viewState: LiveData<SignUpState> = _viewState
 
-    fun obtainEvent(event: SignUpEvent) {
+    fun obtainEvent(event: SignUpEvent, navController: NavController) {
         when (event) {
             is SignUpEvent.ChangeEmail -> {
                 _viewState.postValue(_viewState.value?.copy(email = event.newEmail))
@@ -44,7 +46,9 @@ class SignUpScreenViewModel : ViewModel() {
                 val prev = _viewState.value?.emailAboutPricing
                 _viewState.postValue(prev?.let { _viewState.value?.copy(emailAboutPricing = !it) })
             }
-            else -> {}
+            SignUpEvent.SignUp -> {
+                navController.navigate("restaurants")
+            }
         }
     }
 }

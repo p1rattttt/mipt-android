@@ -2,6 +2,7 @@ package com.p1rat.android.screen.restaurants
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,31 +22,34 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.bundleOf
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.p1rat.android.R
 import com.p1rat.android.data.catalog.RemoteRestaurant
+import java.net.URLEncoder
 
 @Composable
-fun RestaurantScreen(restaurantViewModel: RestaurantViewModel = viewModel()) {
+fun RestaurantScreen(restaurantViewModel: RestaurantViewModel, navController: NavController) {
     val state by restaurantViewModel.viewState.observeAsState()
     val viewState = state ?: return
 
     LazyColumn(verticalArrangement = Arrangement.spacedBy(20.dp)) {
         item { Text(text = stringResource(R.string.popular), fontSize = 40.sp)}
         items(viewState.popularRestaurants) { restaurant ->
-            RestaurantImage(restaurant = restaurant)
+            RestaurantImage(restaurant = restaurant, navController)
         }
         item {Text(text = stringResource(R.string.nearest), fontSize = 40.sp)}
         items(viewState.nearestRestaurants) {
             restaurant -> 
-            RestaurantImage(restaurant = restaurant)
+            RestaurantImage(restaurant = restaurant, navController)
         }
     }
 }
 
 @Composable
-fun RestaurantImage(restaurant: RemoteRestaurant) {
+fun RestaurantImage(restaurant: RemoteRestaurant, navController: NavController) {
     Card(
         modifier = Modifier
             .height(200.dp)
@@ -59,7 +63,11 @@ fun RestaurantImage(restaurant: RemoteRestaurant) {
                 model = restaurant.image,
                 contentDescription = restaurant.name,
                 error = painterResource(id = R.drawable.logo),
-                modifier = Modifier.size(100.dp)
+                modifier = Modifier
+                    .size(100.dp)
+                    .clickable {
+                        navController.navigate("detail/${restaurant.name}/${URLEncoder.encode(restaurant.image, "UTF-8")}/${restaurant.deliveryTime}")
+                    }
             )
             Text(text = restaurant.name, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             Text(text = restaurant.deliveryTime)
