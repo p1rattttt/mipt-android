@@ -1,4 +1,4 @@
-package com.p1rat.android
+package com.p1rat.android.screen.signUp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -44,6 +44,7 @@ class SignUpScreenViewModel : ViewModel() {
                 val prev = _viewState.value?.emailAboutPricing
                 _viewState.postValue(prev?.let { _viewState.value?.copy(emailAboutPricing = !it) })
             }
+            else -> {}
         }
     }
 }

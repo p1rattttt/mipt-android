@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">mipt-android</string>
     <string name="email_label">Email</string>
-    <string name="email_placeholder">user@gmail.com</string>
+    <string name="email_placeholder">alekseev.mi@phystech.edu</string>
     <string name="password_label">Password</string>
     <string name="sign_up_label">Sign up for free</string>
     <string name="sign_up">SignUp</string>
@@ -10,4 +10,6 @@
     <string name="agreement_1">Keep Me Signed In</string>
     <string name="agreement_2">Email Me About Special Pricing</string>
     <string name="agreement_3">already have an account?</string>
+    <string name="popular">Popular restaurants</string>
+    <string name="nearest">Nearest restaurants</string>
 </resources>
