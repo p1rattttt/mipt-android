@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -23,11 +24,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.p1rat.android.R
-import com.p1rat.android.data.RemoteRestaurant
+import com.p1rat.android.data.catalog.RemoteRestaurant
 
 @Composable
 fun RestaurantScreen(restaurantViewModel: RestaurantViewModel = viewModel()) {
-    val viewState by restaurantViewModel.viewState.collectAsState()
+    val state by restaurantViewModel.viewState.observeAsState()
+    val viewState = state ?: return
 
     LazyColumn(verticalArrangement = Arrangement.spacedBy(20.dp)) {
         item { Text(text = stringResource(R.string.popular), fontSize = 40.sp)}
